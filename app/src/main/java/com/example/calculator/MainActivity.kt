@@ -14,9 +14,15 @@ class MainActivity : AppCompatActivity() {
      lateinit var animAlpha: Animation
      var brCount=0
       fun substrPr(a:String){
-          if(mBinding.txtUp.text!="")
+          if(mBinding.txtUp.text!="O")
           mBinding.txtUp.text=mBinding.txtUp.text.toString()+a
       }
+    fun zeroCh(a:String){
+        if(mBinding.txtUp.text=="O")
+            mBinding.txtUp.text=a
+        else
+            mBinding.txtUp.text=mBinding.txtUp.text.toString()+a
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBinding= ActivityMainBinding.inflate(layoutInflater)
@@ -28,46 +34,46 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
 
         mBinding.btn0.setOnClickListener(){
-            mBinding.txtUp.text=mBinding.txtUp.text.toString()+"0"
+            zeroCh("0")
             it.startAnimation(animAlpha)
 
         }
         mBinding.btn1.setOnClickListener(){
-            mBinding.txtUp.text=mBinding.txtUp.text.toString()+"1"
+            zeroCh("1")
             it.startAnimation(animAlpha)
         }
         mBinding.btn2.setOnClickListener(){
-            mBinding.txtUp.text=mBinding.txtUp.text.toString()+"2"
+            zeroCh("2")
             it.startAnimation(animAlpha)}
 
         mBinding.btn3.setOnClickListener(){
-            mBinding.txtUp.text=mBinding.txtUp.text.toString()+"3"
+            zeroCh("3")
             it.startAnimation(animAlpha)
         }
         mBinding.btn4.setOnClickListener(){
-            mBinding.txtUp.text=mBinding.txtUp.text.toString()+"4"
+            zeroCh("4")
             it.startAnimation(animAlpha)}
         mBinding.btn5.setOnClickListener(){
-            mBinding.txtUp.text=mBinding.txtUp.text.toString()+"5"
+            zeroCh("5")
             it.startAnimation(animAlpha)
         }
         mBinding.btn6.setOnClickListener(){
-            mBinding.txtUp.text=mBinding.txtUp.text.toString()+"6"
+            zeroCh("6")
             it.startAnimation(animAlpha)
         }
         mBinding.btn7.setOnClickListener(){
-            mBinding.txtUp.text=mBinding.txtUp.text.toString()+"7"
+            zeroCh("7")
             it.startAnimation(animAlpha)}
         mBinding.btn8.setOnClickListener(){
-            mBinding.txtUp.text=mBinding.txtUp.text.toString()+"8"
+            zeroCh("8")
             it.startAnimation(animAlpha)
         }
         mBinding.btn9.setOnClickListener(){
-            mBinding.txtUp.text=mBinding.txtUp.text.toString()+"9"
+            zeroCh("9")
             it.startAnimation(animAlpha)
         }
         mBinding.btnMult.setOnClickListener(){
-            substrPr("x")
+            substrPr("×")
             it.startAnimation(animAlpha)
         }
         mBinding.btnDiv.setOnClickListener(){
@@ -83,10 +89,13 @@ class MainActivity : AppCompatActivity() {
         }
         mBinding.btnC.setOnClickListener(){
             it.startAnimation(animAlpha)
-            mBinding.txtUp.text=""
+            mBinding.txtUp.text="O"
             mBinding.txtBottom.text=""
         }
         mBinding.btnComma.setOnClickListener(){
+            if(mBinding.txtUp.text=="O")
+                mBinding.txtUp.text="0,"
+            else
             mBinding.txtUp.text=mBinding.txtUp.text.toString()+","
             it.startAnimation(animAlpha)
         }
@@ -103,7 +112,7 @@ class MainActivity : AppCompatActivity() {
         }
         mBinding.btnEq.setOnClickListener(){
             var str=mBinding.txtUp.text.toString()
-           str= str.replace('x','*',true)
+           str= str.replace('×','*',true)
            str= str.replace('÷','/',true)
             str= str.replace(',','.',true)
             str= str.replace("%","/100",true)
@@ -115,7 +124,7 @@ class MainActivity : AppCompatActivity() {
                 val longRes=res.toLong()
                 if(res==longRes.toDouble())
                     mBinding.txtBottom.text="="+longRes.toString()
-                else  mBinding.txtBottom.text="="+res.toString()
+                else  mBinding.txtBottom.text="="+res.toString().replace(".",",",true)
             }
             catch(e:Exception){
                 Log.d("Ошибка","Message: ${e.message}")
@@ -124,6 +133,9 @@ class MainActivity : AppCompatActivity() {
 
             mBinding.btnDel.setOnClickListener(){
                 mBinding.txtUp.text=mBinding.txtUp.text.toString().dropLast(1)
+                if(mBinding.txtUp.text==""){
+                    mBinding.txtUp.text="O"
+                }
             }
 
     }
