@@ -1,5 +1,6 @@
 package com.example.calculator
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -7,6 +8,8 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.Toast
 import com.example.calculator.databinding.ActivityMainBinding
+import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.appbar.CollapsingToolbarLayout
 import net.objecthunter.exp4j.ExpressionBuilder
 
 class MainActivity : AppCompatActivity() {
@@ -24,8 +27,10 @@ class MainActivity : AppCompatActivity() {
             mBinding.txtUp.text=mBinding.txtUp.text.toString()+a
     }
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         mBinding= ActivityMainBinding.inflate(layoutInflater)
+
         setContentView(mBinding.root)
           animAlpha = AnimationUtils.loadAnimation(this, R.anim.alpha)
     }
@@ -111,7 +116,12 @@ class MainActivity : AppCompatActivity() {
 
         }
         mBinding.btnEq.setOnClickListener(){
+
             var str=mBinding.txtUp.text.toString()
+            if(str=="12345678"){
+                val intent= Intent(this, NoteActivity::class.java)
+                startActivity(intent)
+            }
            str= str.replace('×','*',true)
            str= str.replace('÷','/',true)
             str= str.replace(',','.',true)

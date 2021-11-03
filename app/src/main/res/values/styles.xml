@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+<item name="col" type="color">
+    <color name="black">#FF000000</color>
+</item>
 </resources>
