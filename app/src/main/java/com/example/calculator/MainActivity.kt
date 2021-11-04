@@ -6,10 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import android.widget.Toast
 import com.example.calculator.databinding.ActivityMainBinding
-import com.google.android.material.appbar.AppBarLayout
-import com.google.android.material.appbar.CollapsingToolbarLayout
 import net.objecthunter.exp4j.ExpressionBuilder
 
 class MainActivity : AppCompatActivity() {
@@ -119,8 +116,8 @@ class MainActivity : AppCompatActivity() {
 
             var str=mBinding.txtUp.text.toString()
             if(str=="12345678"){
-                val intent= Intent(this, NoteActivity::class.java)
-                startActivity(intent)
+                val intent1= Intent(this, NotesActivity::class.java)
+                startActivity(intent1)
             }
            str= str.replace('×','*',true)
            str= str.replace('÷','/',true)

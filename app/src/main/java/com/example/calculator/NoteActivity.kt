@@ -2,33 +2,27 @@ package com.example.calculator
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.lifecycle.ViewModelProvider
 import com.example.calculator.databinding.ActivityNoteBinding
-import com.google.android.material.appbar.AppBarLayout
-import com.google.android.material.appbar.CollapsingToolbarLayout
 
 class NoteActivity : AppCompatActivity() {
-    lateinit var nBind:ActivityNoteBinding
-    private val recAdapter=NoteRecAdapter()
+lateinit var nBind:ActivityNoteBinding
+lateinit var noteViewModel: NoteViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         nBind= ActivityNoteBinding.inflate(layoutInflater)
         setContentView(nBind.root)
-        nBind.colTool.setExpandedTitleColor(resources.getColor(R.color.black))
-        nBind.appBarLayout.setExpanded(false)
-        init()
+        noteViewModel=ViewModelProvider(this).get(NoteViewModel::class.java)
     }
-    private fun init(){
-        nBind.apply {
-            noteRecycler.layoutManager=GridLayoutManager(this@NoteActivity,2)
-            noteRecycler.adapter=recAdapter
-            addNoteBtn.setOnClickListener(){
-                var id=0
-                val note=Note(id,"12","34")
-                recAdapter.addNote(note)
-                id++
-            }
+
+    override fun onPause() {
+        super.onPause()
+        if(nBind.edTxt.text.toString()==""&&nBind.edTxtHead.text.toString()==""){
+
+        }
+        else{
+val note=Note(0,nBind.edTxtHead.text.toString(),nBind.edTxt.text.toString())
+            noteViewModel.addNote(note)
         }
     }
 }

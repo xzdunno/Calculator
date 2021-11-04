@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 
 class NoteRepository(private val noteDao: NoteDao) {
 
-    val getAllNotes: List<Note> =noteDao.getAllNotes()
+    val getAllNotes: LiveData<List<Note>> =noteDao.getAllNotes()
             suspend fun addNote(note:Note){
                 noteDao.addNote(note)
             }

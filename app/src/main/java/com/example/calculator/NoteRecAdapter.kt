@@ -3,16 +3,17 @@ package com.example.calculator
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.example.calculator.databinding.NoteItemBinding
 
 class NoteRecAdapter:RecyclerView.Adapter<NoteRecAdapter.NoteHolder>() {
-    val noteList=ArrayList<Note>()
+    var noteList=emptyList<Note>()
     class NoteHolder(item:View):RecyclerView.ViewHolder(item){
         val binding=NoteItemBinding.bind(item)
         fun bind(note:Note)=with(binding){
-            txtHeader.text="Заголовок"
-            txtNote.text="Дождались меня белые ночи Над простором густых островов… Снова смотрят знакомые очи, И мелькает былое без слов."
+            txtHeader.text=note.header
+            txtNote.text= note.contents
         }
     }
 
@@ -28,8 +29,8 @@ class NoteRecAdapter:RecyclerView.Adapter<NoteRecAdapter.NoteHolder>() {
     override fun getItemCount(): Int {
         return noteList.size
     }
-    fun addNote(note:Note){
-        noteList.add(note)//поменять на получение массива через getAllNotes и засунуть в getItemCount
-        notifyDataSetChanged()
+    fun addNote(note: List<Note>){
+        this.noteList=note
+notifyDataSetChanged()
     }
 }
